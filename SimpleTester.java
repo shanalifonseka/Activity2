@@ -12,6 +12,7 @@ public class SimpleTester {
  
 		myPanel.itemReceived(1);
 		myPanel.itemReceived(1);
+		myPanel.itemReceived(1);
 		myPanel.itemReceived(3);
 		myPanel.itemReceived(2);
 		myPanel.itemReceived(4);

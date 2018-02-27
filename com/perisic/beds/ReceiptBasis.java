@@ -19,15 +19,15 @@ public class ReceiptBasis {
 	 * @return
 	 */
 	public String computeSum() { 
-		String receipt = "----Recycling Machine Recipt----\n-------------------------------------------\n"; 
+		String receipt = "--------------------------------------------------Recycling Machine Recipt------------------------------------------------\n-------------------------------------------------------------------------------------------------------------------------------------\n"; 
 		int sum = 0; 
 		for(int i=0; i < myItems.size(); i++ ) {
 			DepositItem item = myItems.get(i); 
-			receipt = receipt + item.number + "  " + item.name + "\t" + ": " +item.value; 
+			receipt = receipt+ "\t\t" + item.number + "  " + item.name + "\t" + ": " +item.value; 
 			receipt = receipt + System.getProperty("line.separator");
 			sum = sum + item.value; 
 		}
-		receipt = receipt + "\nTotal\t: "+sum; 
+		receipt = receipt + "\n\t\tTotal\t: "+sum; 
 		return receipt; 
 	}
 	
@@ -51,21 +51,17 @@ public class ReceiptBasis {
 			
 		}
 		
-		count = "\n" + "\n" + "--Count-------------------------------" + "\n" + "Bottle Count\t: " + bottleCount + "\n" + "Can Count\t: " + canCount + "\n" + "Crate Count\t: " + crateCount + "\n" + "Bag Count\t: " + bagCount;
+		count = "\n\n\t\t--Count-------------------------------" + "\n\t\tBottle Count\t: " + bottleCount + "\n\t\tCan Count\t: " + canCount + "\n\t\tCrate Count\t: " + crateCount + "\n\t\tBag Count\t: " + bagCount;
 		return count;
 	
 }
-	public String getProgress(int totalWeight, int weightLimit, boolean warning) {
-		String progress = "\n" + "\n" +"--Progress--------------------------\n";
+	public String displayProgress(int totalWeight, int weightLimit) {
+		String progress = "\n\n\t\t--Progress--------------------------\n";
 		Double t = (double) totalWeight;
 		Double w = (double) weightLimit;
 		DecimalFormat df = new DecimalFormat("#.##");
 		
-		progress = progress + df.format((t / w)*100)+ "%";
-		
-		if (warning == true) {
-			progress = progress + "\n Warning! weight limit exceeded";
-		} 
+		progress = progress + "\t\t" + df.format((t / w)*100)+ "%";
 		
 		return progress;
 	}

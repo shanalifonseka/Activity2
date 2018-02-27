@@ -23,7 +23,11 @@ public class CustomerPanel {
 	/**
 	 * 
 	 */
-	public void printReceipt() { 
-		receiver.printReceipt();
+	public String printReceipt() { 
+		return receiver.printReceipt();
+	}
+	
+	public int getProgress() { 
+		return receiver.getProgress();
 	}
 }

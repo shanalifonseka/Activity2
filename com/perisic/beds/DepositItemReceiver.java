@@ -1,15 +1,21 @@
 package com.perisic.beds;
 
+import java.text.DecimalFormat;
+
+import javax.swing.JOptionPane;
+
 /**
  * @author Marc Conrad
  *
  */
 public class DepositItemReceiver {
-	boolean warning = false;
 	int totalWeight = 0 ;
-	int weightLimit = 1500;
+	int weightLimit = 1600;
+	int progress;
+	String Receipt;
 	ReceiptBasis theReceiptBasis = null; 
 	PrinterInterface printer = null; 
+	
 	/**
 	 * 
 	 */
@@ -49,18 +55,36 @@ public class DepositItemReceiver {
 
 		if (totalWeight<=weightLimit) {
 			theReceiptBasis.addItem(item); 
+			calculateProgress();
+			System.out.println(progress);
+			JOptionPane.showMessageDialog(null, "Item added sucessfully! ");
 		} else {
 			totalWeight = totalWeight - item.getWeight();
-			warning = true;
-		}
+			JOptionPane.showMessageDialog(null, "Warning! Recycling Machine is overloaded");		}
 		
 	}
 	/**
 	 * 
 	 */
-	public void printReceipt() { 
-		String str = theReceiptBasis.computeSum() + theReceiptBasis.countItems() + theReceiptBasis.getProgress(totalWeight, weightLimit, warning); 
-		printer.print(str); 
-		theReceiptBasis = null; 
+	public String printReceipt() { 
+		Receipt = theReceiptBasis.computeSum() + theReceiptBasis.countItems() + theReceiptBasis.displayProgress(totalWeight, weightLimit); 
+		printer.print(Receipt); 
+		theReceiptBasis = null;
+		
+		return Receipt;
+	}
+	
+	public void calculateProgress() {
+		double pro = 0.0;
+		Double t = (double) totalWeight;
+		Double w = (double) weightLimit;
+		DecimalFormat df = new DecimalFormat("#.##");
+		
+		pro = Double.parseDouble(df.format((t / w)*100));
+		progress = (int)pro;
+	}
+	
+	public int getProgress() {
+		return progress;
 	}
 }
