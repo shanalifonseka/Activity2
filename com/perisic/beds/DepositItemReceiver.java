@@ -7,7 +7,7 @@ package com.perisic.beds;
 public class DepositItemReceiver {
 	boolean warning = false;
 	int totalWeight = 0 ;
-	int weightLimit = 1600;
+	int weightLimit = 1500;
 	ReceiptBasis theReceiptBasis = null; 
 	PrinterInterface printer = null; 
 	/**
