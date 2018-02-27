@@ -14,4 +14,8 @@ public class Bag extends DepositItem {
 		name = "Bag";
 		value = 8; 
 	}
+	
+	public int getWeight() {
+		return weight;
+	}
 }

@@ -1,4 +1,5 @@
 package com.perisic.beds;
+import java.text.DecimalFormat;
 import java.util.Vector; 
 
 /**
@@ -50,8 +51,23 @@ public class ReceiptBasis {
 			
 		}
 		
-		count = "\n"+"\n" + "Bottle Count\t: " + bottleCount + "\n" + "Can Count\t: " + canCount + "\n" + "Crate Count\t: " + crateCount + "\n" + "Bag Count\t: " + bagCount;
+		count = "\n" + "\n" + "--Count-------------------------------" + "\n" + "Bottle Count\t: " + bottleCount + "\n" + "Can Count\t: " + canCount + "\n" + "Crate Count\t: " + crateCount + "\n" + "Bag Count\t: " + bagCount;
 		return count;
+	
+}
+	public String getProgress(int totalWeight, int weightLimit, boolean warning) {
+		String progress = "\n" + "\n" +"--Progress--------------------------\n";
+		Double t = (double) totalWeight;
+		Double w = (double) weightLimit;
+		DecimalFormat df = new DecimalFormat("#.##");
+		
+		progress = progress + df.format((t / w)*100)+ "%";
+		
+		if (warning == true) {
+			progress = progress + "\n Warning! weight limit exceeded";
+		} 
+		
+		return progress;
 	}
 }
 

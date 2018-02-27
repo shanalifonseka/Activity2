@@ -8,4 +8,6 @@ public abstract class DepositItem {
 	int number; 
 	int value;
 	String name;
+	
+	abstract public int getWeight();
 }

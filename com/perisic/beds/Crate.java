@@ -14,4 +14,8 @@ public class Crate extends DepositItem {
 		name = "Crate";
 		value = 42; 
 	}
+	
+	public int getWeight() {
+		return weight;
+	}
 }

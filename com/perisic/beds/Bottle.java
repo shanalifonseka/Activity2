@@ -18,4 +18,8 @@ public class Bottle extends DepositItem {
 		}
 		value = 18; 
 	}
+	
+	public int getWeight() {
+		return weight;
+	}
 }

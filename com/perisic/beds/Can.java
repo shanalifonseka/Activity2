@@ -14,4 +14,8 @@ public class Can extends DepositItem {
 		name = "Can";
 		value = 16; 
 	}
+	
+	public int getWeight() {
+		return weight;
+	}
 }
