@@ -28,6 +28,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
             myCustomerPanel.itemReceived(4);
 		} else if( e.getSource().equals(slot5) ) { 
             myCustomerPanel.itemReceived(5);
+            System.out.print("yyyy");
 		} else if( e.getSource().equals(receipt) ) { 
             print(myCustomerPanel.printReceipt());
 		}
@@ -63,7 +64,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		slot2.addActionListener(this); 
 		slot3.addActionListener(this); 
 		slot4.addActionListener(this); 
-		slot5.addActionListener(this); 
+		
 		
 		panel.add(receipt); 
 		receipt.addActionListener(this);
@@ -80,19 +81,28 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	}
 	
 	public void updateProgressBar(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            final int currentValue = i;
-            try {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        pb.setValue(currentValue);
+       new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                
+                for( int i = start; i <= end; i++ ){
+                	int currentValue = i;
+                    try 
+                    {
+                    	pb.setValue(currentValue);
+                        Thread.sleep(30);
                     }
-                });
-                java.lang.Thread.sleep(5);
-            } catch (InterruptedException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+                    catch (InterruptedException e) 
+                    {
+                    	JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
+                    
+                }
             }
-        }
+        }){
+        
+    }.start();
  
     }
 	
