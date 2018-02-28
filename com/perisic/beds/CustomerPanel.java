@@ -30,4 +30,12 @@ public class CustomerPanel {
 	public int getProgress() { 
 		return receiver.getProgress();
 	}
+	
+	public boolean getWarning() { 
+		return receiver.getWarning();
+	}
+	
+	public int getTotalWeight() { 
+		return receiver.getTotalWeight();
+	}
 }

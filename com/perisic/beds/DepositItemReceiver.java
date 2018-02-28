@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
  *
  */
 public class DepositItemReceiver {
+	boolean warning = false;
 	int totalWeight = 0 ;
 	int weightLimit = 1600;
 	int progress;
@@ -59,6 +60,7 @@ public class DepositItemReceiver {
 			System.out.println(progress);
 			JOptionPane.showMessageDialog(null, "Item added sucessfully! ");
 		} else {
+			warning = true;
 			totalWeight = totalWeight - item.getWeight();
 			JOptionPane.showMessageDialog(null, "Warning! Recycling Machine is overloaded");		}
 		
@@ -86,5 +88,13 @@ public class DepositItemReceiver {
 	
 	public int getProgress() {
 		return progress;
+	}
+	
+	public boolean getWarning() {
+		return warning;
+	}
+	
+	public int getTotalWeight() {
+		return totalWeight;
 	}
 }

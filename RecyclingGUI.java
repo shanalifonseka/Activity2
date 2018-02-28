@@ -16,6 +16,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	int ProgressEnd;
 	
 	public void actionPerformed(ActionEvent e) {
+		boolean CheckProgress = true;
 		System.out.println("Received: e.getActionCommand()="+e.getActionCommand()+
 							" e.getSource()="+e.getSource().toString() ); 
 		if( e.getSource().equals(slot1) ) { 
@@ -28,13 +29,21 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
             myCustomerPanel.itemReceived(4);
 		} else if( e.getSource().equals(slot5) ) { 
             myCustomerPanel.itemReceived(5);
-            System.out.print("yyyy");
 		} else if( e.getSource().equals(receipt) ) { 
-            print(myCustomerPanel.printReceipt());
+			if (myCustomerPanel.getTotalWeight()!= 0 ) {
+				CheckProgress = false;
+	            print(myCustomerPanel.printReceipt());
+			} else {
+				JOptionPane.showMessageDialog(null, "Add item(s) befroe generate the receipt! ");
+			}
+			
+		}
+		
+		if (myCustomerPanel.getWarning()== false && CheckProgress) {
+			ProgressEnd = myCustomerPanel.getProgress();
+			updateProgressBar(0, ProgressEnd);
 		}
 
-		ProgressEnd = myCustomerPanel.getProgress();
-		updateProgressBar(0, ProgressEnd);
 	}
 	
 	JButton slot1 = new JButton("      Can     "); 
