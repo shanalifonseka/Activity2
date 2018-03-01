@@ -14,6 +14,7 @@ import com.perisic.beds.ReceiptPrinter;
 public class RecyclingGUI extends JFrame implements ActionListener  {
 	CustomerPanel myCustomerPanel = new CustomerPanel(new ReceiptPrinter());
 	int ProgressEnd;
+	int ProgressStart = 0;
 	
 	public void actionPerformed(ActionEvent e) {
 		boolean CheckProgress = true;
@@ -41,7 +42,8 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		
 		if (myCustomerPanel.getWarning()== false && CheckProgress) {
 			ProgressEnd = myCustomerPanel.getProgress();
-			updateProgressBar(0, ProgressEnd);
+			updateProgressBar(ProgressStart, ProgressEnd);
+			ProgressStart = ProgressEnd;
 		}
 
 	}
@@ -73,7 +75,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		slot2.addActionListener(this); 
 		slot3.addActionListener(this); 
 		slot4.addActionListener(this); 
-		
+		slot5.addActionListener(this);
 		
 		panel.add(receipt); 
 		receipt.addActionListener(this);
@@ -121,8 +123,41 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	
 	
 	public static void main(String [] args ) { 
-		RecyclingGUI myGUI = new RecyclingGUI(); 
-		myGUI.setVisible(true);
+		
+		new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+            	RecyclingGUI myGUI = null;
+                int i = 1;
+                
+                while( i == 1 ){
+                	
+                    try 
+                    {
+                    	myGUI = new RecyclingGUI(); 
+                		myGUI.setVisible(true);
+                        Thread.sleep(30000);
+                        System.out.print(i);
+                        
+                        int input = JOptionPane.showConfirmDialog(null, "Time is out! Do you want to continue?");
+                        
+                        if(input==1){
+                            i = 0;
+                        }
+                        myGUI.setVisible(false);
+                    }
+                    catch (InterruptedException e) 
+                    {
+                    	JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
+                    
+                }
+            }
+        }){
+        
+    }.start();
+ 
 		
 	}
 		
