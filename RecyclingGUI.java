@@ -15,13 +15,15 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	CustomerPanel myCustomerPanel = new CustomerPanel(new ReceiptPrinter());
 	int ProgressEnd;
 	int ProgressStart = 0;
+	long endTimeMillis = System.currentTimeMillis() + 30000;
 	
 	public void actionPerformed(ActionEvent e) {
 		boolean CheckProgress = true;
 		System.out.println("Received: e.getActionCommand()="+e.getActionCommand()+
 							" e.getSource()="+e.getSource().toString() ); 
-		if( e.getSource().equals(slot1) ) { 
-            myCustomerPanel.itemReceived(1);
+		
+		if( e.getActionCommand().equals("      Can     ") ) { 
+			myCustomerPanel.itemReceived(1);
 		} else if( e.getSource().equals(slot2) ) { 
             myCustomerPanel.itemReceived(2);
 		} else if( e.getSource().equals(slot3) ) { 
@@ -45,6 +47,8 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 			updateProgressBar(ProgressStart, ProgressEnd);
 			ProgressStart = ProgressEnd;
 		}
+		
+		endTimeMillis = System.currentTimeMillis() + 30000;
 
 	}
 	
@@ -121,9 +125,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		ta.setText(str);
 	}
 	
-	
-	public static void main(String [] args ) { 
-		
+	public void runGUI() {
 		new Thread(new Runnable() {
 
             @Override
@@ -137,7 +139,9 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
                     {
                     	myGUI = new RecyclingGUI(); 
                 		myGUI.setVisible(true);
-                        Thread.sleep(30000);
+                		while(myGUI.endTimeMillis>=System.currentTimeMillis()) {
+                			Thread.sleep(1);
+                		}
                         System.out.print(i);
                         
                         int input = JOptionPane.showConfirmDialog(null, "Time is out! Do you want to continue?");
@@ -157,7 +161,11 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
         }){
         
     }.start();
- 
+	}
+	
+	public static void main(String [] args ) { 
+		RecyclingGUI myGUI = new RecyclingGUI();
+		myGUI.runGUI();
 		
 	}
 		

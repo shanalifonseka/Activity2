@@ -9,3 +9,5 @@
 /PrinterInterface.class
 /ReceiptBasis.class
 /ReceiptPrinter.class
+/ActionPerformedControler.class
+/ActionPerformHandler.class
